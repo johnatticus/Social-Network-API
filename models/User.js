@@ -1,37 +1,38 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-// Child documents or subdocuments can be embedded into a parent document
-// The bookSchema defines the schema of the subdocument
-const userSchema = new mongoose.Schema({
-  username: { type: String, unique: true, required: true, trimmed: true },
-  email: { type: String, unique: true, required: true, }, //MONGODB VALIDATION???
-
-});
-
-// The librarySchema defines the schema of the parent document
-const librarySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  // This will include an array that holds all the books
-  books: [bookSchema],
-  lastAccessed: { type: Date, default: Date.now },
-});
-
-// Uses mongoose.model() to create model
-const Library = mongoose.model('Library', librarySchema);
-
-// Uses model to create new instance including subdocument
-const bookData = [
-  { title: 'Diary of Anne Frank', price: 10 },
-  { title: 'One Thousand Years of Solitude', price: 20 },
-  { title: 'History of Hogwarts', price: 5 },
-];
-
-Library.create({ name: 'Books', books: bookData }, (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(data);
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      // match: look up regex ("Must be an email address")
+    },
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      }
+    ]
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
   }
-});
+)
 
-module.exports = Library;
+module.exports = User;
