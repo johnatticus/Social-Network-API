@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/johnatticus/Social-Network-API/issues"
   },
-  "homepage": "https://github.com/johnatticus/Social-Network-API#readme"
+  "homepage": "https://github.com/johnatticus/Social-Network-API#readme",
+  "dependencies": {
+    "mongoose": "^6.3.4"
+  }
 }
