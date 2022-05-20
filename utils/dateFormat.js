@@ -38,7 +38,7 @@ module.exports = (
             11: 'Dec',
         };
     } else {
-        months {
+        months = {
             0: 'January',
             1: 'February',
             2: 'March',
