@@ -4,12 +4,24 @@ const dateFormat = require('../utils/dateFormat');
 
 const thoughtSchema = new Schema(
     {
-        thoughtPost: {
+        thoughtText: {
             // FILL OUT
+            type: String,
+            required: true,
+            minlength: 1,
+            maxlength: 250,
         },
         createdAt: {
-            get: timestamp => dateFormat(timestamp)
-        }
+            // get: timestamp => dateFormat(timestamp)
+            type: Date,
+            default: Date.now,
+        },
+        reactions: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Reaction',
+            }
+        ]
     },
     {
         toJSON: {
@@ -20,4 +32,4 @@ const thoughtSchema = new Schema(
 )
 const Thought = model('Thought', thoughtSchema);
 
-module.exports = Thoughts;
+module.exports = Thought;
