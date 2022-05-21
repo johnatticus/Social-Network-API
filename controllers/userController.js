@@ -8,7 +8,7 @@ const userCount = async () =>
 const userController = {
     //CRUD COMMANDS
 
-    // Get all users
+    // Get all users...WORKS
     getUsers(req, res) {
         User.find()
         .then(async (users) => {
@@ -24,7 +24,7 @@ const userController = {
         });
     },
 
-    // get a user by id
+    // get a user by id...WORKS
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
         .select('-__v')
@@ -42,20 +42,20 @@ const userController = {
             return res.status(500).json(err);
         });
     },
-    // create a new user
+    // create a new user...WORKS
     createUser(req, res) {
         User.create(req.body)
         .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a user
+    // Delete a user...WORKS BUT KILLS SERVER
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
         .then((user) =>
             !user
             ? res.status(404).json({ message: 'No such user exists' })
-            : Thoughts.findOneAndUpdate(
+            : Thought.findOneAndUpdate(
                 { user: req.params.userId },
                 { $pull: { user: req.params.userId } },
                 { new: true }
@@ -79,7 +79,7 @@ const userController = {
 
     },
 
-    // Add a friend
+    // Add a friend...WORKS
     addFriend(req, res) {
         console.log('You are adding a friend');
         console.log(req.body);
@@ -98,7 +98,7 @@ const userController = {
         .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a friend
+    // Delete a friend...WORKS
     removeFriend(req, res) {
         console.log('You are REMOVING a friend');
         console.log(req.params.friendId);

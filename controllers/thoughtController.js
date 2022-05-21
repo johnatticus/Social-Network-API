@@ -1,13 +1,13 @@
 const { User, Thought } = require("../models");
 
 const thoughtController = {
-    // get all thoughts
+    // get all thoughts..WORKS
     getThoughts(req, res) {
         Thought.find()
         .then((thoughts) => res.json(thoughts))
         .catch((err) => res.status(500).json(err));
     },
-    // Get a thought by ID
+    // Get a thought by ID...WORKS
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
         .select("-__v")
@@ -18,7 +18,7 @@ const thoughtController = {
         )
         .catch((err) => res.status(500).json(err));
     },
-    // Create a thought
+    // Create a thought...WORKS BUT NEEDS USER ATTACHED
     createThought(req, res) {
         Thought.create(req.body)
         .then((thought) => res.json(thought))
@@ -27,7 +27,7 @@ const thoughtController = {
             return res.status(500).json(err);
         });
     },
-    // Delete a thought
+    // Delete a thought...WORKS
     deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
         .then((thought) =>
@@ -71,7 +71,7 @@ const thoughtController = {
         .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a friend
+    // Delete a reaction
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
