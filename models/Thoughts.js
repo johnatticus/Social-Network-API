@@ -11,6 +11,10 @@ const thoughtSchema = new Schema(
             minlength: 1,
             maxlength: 250,
         },
+        username: {
+            type: String,
+            required: true,
+        },
         createdAt: {
             // get: timestamp => dateFormat(timestamp)
             type: Date,
@@ -20,6 +24,12 @@ const thoughtSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Reaction',
+            }
+        ],
+        user: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
             }
         ]
     },

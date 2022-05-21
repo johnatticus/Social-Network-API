@@ -56,8 +56,8 @@ const userController = {
             !user
             ? res.status(404).json({ message: 'No such user exists' })
             : Thoughts.findOneAndUpdate(
-                { username: req.params.userId },
-                { $pull: { username: req.params.userId } },
+                { user: req.params.userId },
+                { $pull: { user: req.params.userId } },
                 { new: true }
                 )
         )
