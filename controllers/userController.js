@@ -74,6 +74,11 @@ const userController = {
         });
     },
 
+    // Update a user
+    updateUser(req, res) {
+
+    },
+
     // Add a friend
     addFriend(req, res) {
         console.log('You are adding a friend');
@@ -88,7 +93,7 @@ const userController = {
             ? res
                 .status(404)
                 .json({ message: 'No user found with that ID :(' })
-            : res.json(student)
+            : res.json(user)
         )
         .catch((err) => res.status(500).json(err));
     },
