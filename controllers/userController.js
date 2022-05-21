@@ -56,8 +56,8 @@ const userController = {
             !user
             ? res.status(404).json({ message: 'No such user exists' })
             : Thoughts.findOneAndUpdate(
-                { users: req.params.userId },
-                { $pull: { users: req.params.userId } },
+                { username: req.params.userId },
+                { $pull: { username: req.params.userId } },
                 { new: true }
                 )
         )
@@ -100,9 +100,11 @@ const userController = {
 
     // Delete a friend
     removeFriend(req, res) {
+        console.log('You are REMOVING a friend');
+        console.log(req.params.friendId);
         User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $pull: { friends: { friendId: req.params.friendId } } },
+        { $pull: { friends: { $in: req.params.friendId } } },
         { runValidators: true, new: true }
         )
         .then((user) =>
