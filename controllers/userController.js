@@ -34,7 +34,7 @@ const userController = {
             ? res.status(404).json({ message: 'No user with that ID' })
             : res.json({
                 user,
-                friends: await friends(req.params.userId),
+                // friends: await friends(req.params.userId),
                 })
         )
         .catch((err) => {
@@ -55,9 +55,9 @@ const userController = {
         .then((user) =>
             !user
             ? res.status(404).json({ message: 'No such user exists' })
-            : Course.findOneAndUpdate(
-                { students: req.params.userId },
-                { $pull: { students: req.params.userId } },
+            : Thoughts.findOneAndUpdate(
+                { users: req.params.userId },
+                { $pull: { users: req.params.userId } },
                 { new: true }
                 )
         )
@@ -85,7 +85,7 @@ const userController = {
         console.log(req.body);
         User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friend: req.body } },
+        { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
         )
         .then((user) =>
