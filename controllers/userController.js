@@ -49,18 +49,18 @@ const userController = {
         .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a user...WORKS BUT KILLS SERVER
+    // Delete a user...WORKS....killed server when trying to delete attached thoughts
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
-        .then((user) =>
-            !user
-            ? res.status(404).json({ message: 'No such user exists' })
-            : Thought.findOneAndUpdate(
-                { user: req.params.userId },
-                { $pull: { user: req.params.userId } },
-                { new: true }
-                )
-        )
+        // .then((user) =>
+        //     !user
+        //     ? res.status(404).json({ message: 'No such user exists' })
+        //     : Thought.findOneAndUpdate(
+        //         { user: req.params.userId },
+        //         { $pull: { user: req.params.userId } },
+        //         { new: true }
+        //         )
+        // )
         .then((friends) =>
             !friends
             ? res.status(404).json({
