@@ -20,18 +20,13 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
         },
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Reaction',
-            }
-        ],
         user: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
             }
-        ]
+        ],
+        reactions: [reactionSchema],
     },
     {
         toJSON: {
