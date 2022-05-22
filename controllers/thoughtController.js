@@ -21,11 +21,24 @@ const thoughtController = {
     // Create a thought...WORKS BUT NEEDS USER ATTACHED
     createThought(req, res) {
         Thought.create(req.body)
-        .then((thought) => res.json(thought))
-        .catch((err) => {
-            console.log(err);
-            return res.status(500).json(err);
-        });
+        .then((thought) => {
+            return User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { thoughts: thought._id } },
+                { new: true }
+            );
+        })
+        .then((user) =>
+        !user
+          ? res.status(404).json({
+              message: 'No user with that ID',
+            })
+          : res.json('Thought created')
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
     },
     // Delete a thought...WORKS
     deleteThought(req, res) {
