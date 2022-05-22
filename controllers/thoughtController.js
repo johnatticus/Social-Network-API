@@ -18,7 +18,7 @@ const thoughtController = {
         )
         .catch((err) => res.status(500).json(err));
     },
-    // Create a thought...WORKS BUT NEEDS USER ATTACHED
+    // Create a thought...WORKS
     createThought(req, res) {
         Thought.create(req.body)
         .then((thought) => {
@@ -51,7 +51,7 @@ const thoughtController = {
         .then(() => res.json({ message: "Thought and user deleted!" }))
         .catch((err) => res.status(500).json(err));
     },
-    // Update a thought
+    // Update a thought...WORKS
     updateThought(req, res) {
         Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
