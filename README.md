@@ -5,7 +5,7 @@
 
 ![Social Network API](https://raw.githubusercontent.com/johnatticus/Social-Network-API/main/assets/images/screenshot.png)
 
-[CLICK HERE for video demo](https://drive.google.com/file/d/1YIA5rD1l5PZjjux14TdgP8n__pPjRlDi/view)
+[CLICK HERE for video demo](https://drive.google.com/file/d/1q_PGl9pP3dCpFqGnWtu_P2STLaAJTZFK/view)
 
 ---
 ## Table of Contents
