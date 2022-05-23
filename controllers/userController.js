@@ -1,16 +1,18 @@
+const { ObjectId } = require('mongoose').Types;
 const { User, Thoughts } = require('../models');
 
+// counts total amount of users. Not sure why I have this.
 const userCount = async () =>
-  User.aggregate()
+    User.aggregate()
     .count('userCount')
     .then((numberOfUsers) => numberOfUsers);
 
 const userController = {
-    //CRUD COMMANDS
 
-    // Get all users...WORKS
+    // get all users...WORKS
     getUsers(req, res) {
         User.find()
+        .select('-__v')
         .then(async (users) => {
             const userObj = {
             users,
@@ -34,7 +36,6 @@ const userController = {
             ? res.status(404).json({ message: 'No user with that ID' })
             : res.json({
                 user,
-                // friends: await friends(req.params.userId),
                 })
         )
         .catch((err) => {
