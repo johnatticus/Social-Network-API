@@ -65,7 +65,7 @@ const thoughtController = {
         )
         .catch((err) => res.status(500).json(err));
     },
-    // Add a reaction....WORKS...but why _id and reactionId? and is it supposed to link to user?
+    // Add a reaction....WORKS...but why _id and reactionId?
     addReaction(req, res) {
         console.log('You are adding a reaction');
         console.log(req.body);
@@ -84,11 +84,12 @@ const thoughtController = {
         .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a reaction....does NOT work. yet.
+    // Delete a reaction....WORKS
     deleteReaction(req, res) {
+        console.log('You are DELETING a REACTION');
         Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { $in: req.params.reactionId } } },
+        { $pull: { reactions: { reactionId: req.body.reactionId } } },
         { runValidators: true, new: true }
         )
         .then((thought) =>
