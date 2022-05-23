@@ -56,9 +56,9 @@ const userController = {
         // .then((user) =>
         //     !user
         //     ? res.status(404).json({ message: 'No such user exists' })
-        //     : Thought.findOneAndUpdate(
-        //         { user: req.params.userId },
-        //         { $pull: { user: req.params.userId } },
+        //     : Thought.deleteMany(
+        //         { _id: { $in: user.thought } },
+        //         // { $pull: { username: req.body.username } },
         //         { new: true }
         //         )
         // )

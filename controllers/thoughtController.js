@@ -65,7 +65,7 @@ const thoughtController = {
         )
         .catch((err) => res.status(500).json(err));
     },
-    // Add a reaction....WORKS...but why _id and reactionId?
+    // Add a reaction....WORKS
     addReaction(req, res) {
         console.log('You are adding a reaction');
         console.log(req.body);
